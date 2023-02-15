@@ -1,0 +1,22 @@
+// "<:" ===== "subtype"
+// even-int <: int <: number
+
+.type vertex <: symbol
+
+.decl edge(v1: vertex, v2: vertex)
+.input edge
+
+.decl vtx(v: vertex)
+vtx(x) :- edge(x, _).
+vtx(y) :- edge(_, y).
+
+// Open-world assumption
+// Closed-world assumption: Everything that is true,
+//                          is also known to be true
+
+.decl path(v1: vertex, v2: vertex)
+.output path
+
+// For all vertices x, there is a path from x to x
+path(x, x) :- vtx(x).
+path(x, z) :- edge(x, y), path(y, z).

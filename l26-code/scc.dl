@@ -1,0 +1,16 @@
+// "<:" ===== "subtype"
+// even-int <: int <: number
+
+.type vertex <: symbol
+
+.decl edge(v1: vertex, v2: vertex)
+.input edge
+
+.decl path(v1: vertex, v2: vertex)
+
+.decl scc(v1: vertex, v2: vertex)
+.output scc
+
+path(x, y) :- edge(x, y).
+path(x, z) :- edge(x, y), path(y, z).
+scc(x, y) :- path(x, y), path(y, x).

@@ -1,0 +1,10 @@
+.type person <: symbol
+
+.decl parent(p1: person, p2: person)
+.input parent
+
+.decl cousins(p1: person, p2: person)
+.output cousins
+
+cousins(x, y) :- parent(u, z), parent(z, x),
+                 parent(u, w), parent(w, y).

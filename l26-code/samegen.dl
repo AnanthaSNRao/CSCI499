@@ -1,0 +1,10 @@
+.type person <: symbol
+
+.decl parent(p1: person, p2: person)
+.input parent
+
+.decl sgen(p1: person, p2: person)
+.output sgen
+
+sgen(x, y) :- parent(z, x), parent(z, y).
+sgen(z, w) :- sgen(x, y), parent(x, z), parent(y, w).

@@ -1,0 +1,30 @@
+// str(i, c) means that the character at location i is c
+.decl str(index: number, c: symbol)
+
+// aabbaab
+str(0, "a").
+str(1, "a").
+str(2, "b").
+str(3, "b").
+str(4, "a").
+str(5, "a").
+str(6, "b").
+str(7, "a").
+
+// q1(i) means that after reading i characters,
+// we are in state q1
+.decl q1(index: number)
+.decl q2(index: number)
+
+q1(0).
+
+q2(n + 1) :- q1(n), str(n, "a").
+q1(n + 1) :- q1(n), str(n, "b").
+
+q2(n + 1) :- q2(n), str(n, "a").
+q1(n + 1) :- q2(n), str(n, "b").
+
+.decl accepted(index: number)
+.output accepted
+
+accepted(n) :- q1(n), !str(n, _).
